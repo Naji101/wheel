@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore Firebase service account keys
+*.json
+

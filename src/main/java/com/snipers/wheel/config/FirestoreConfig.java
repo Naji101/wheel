@@ -8,8 +8,9 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 public class FirestoreConfig {
@@ -17,19 +18,26 @@ public class FirestoreConfig {
     @Bean
     public FirebaseApp firebaseApp() {
         try {
-            // Load the service account key JSON file
-            FileInputStream serviceAccount = new FileInputStream("C:\\Users\\Nader Qanadilo\\Desktop\\Naji Projects\\wheel\\wheel\\target\\classes\\wheel-eb920-firebase-adminsdk-zd34d-902d603493.json");
+            // Get the service account JSON from an environment variable
+            String serviceAccountKey = System.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON");
+            if (serviceAccountKey == null) {
+                throw new IllegalStateException("Environment variable GOOGLE_APPLICATION_CREDENTIALS_JSON not set");
+            }
+
+            // Convert the JSON string to an InputStream
+            ByteArrayInputStream serviceAccountStream =
+                    new ByteArrayInputStream(serviceAccountKey.getBytes(StandardCharsets.UTF_8));
 
             // Build the FirebaseOptions with the credentials
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccountStream))
                     .build();
 
             // Initialize the FirebaseApp instance
             return FirebaseApp.initializeApp(options);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to initialize Firebase test", e);
+            throw new RuntimeException("Failed to initialize Firebase", e);
         }
     }
 
