@@ -29,7 +29,7 @@ public class FirestoreConfig {
             return FirebaseApp.initializeApp(options);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to initialize Firebase", e);
+            throw new RuntimeException("Failed to initialize Firebase test", e);
         }
     }
 
