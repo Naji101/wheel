@@ -23,7 +23,6 @@ public class FirestoreConfig {
             if (serviceAccountKey == null) {
                 throw new IllegalStateException("Environment variable GOOGLE_APPLICATION_CREDENTIALS_JSON not set");
             }
-
             // Convert the JSON string to an InputStream
             ByteArrayInputStream serviceAccountStream =
                     new ByteArrayInputStream(serviceAccountKey.getBytes(StandardCharsets.UTF_8));
