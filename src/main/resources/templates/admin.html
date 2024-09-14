@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin - Generate Prize Winners</title>
+</head>
+<body>
+<h1>Admin Panel</h1>
+<button onclick="generateCsv()">Generate Prize Winners CSV</button>
+
+<script>
+        function generateCsv() {
+            // Send a request to the backend to generate and download the CSV file
+            window.location.href = '/admin/generate-csv';
+        }
+    </script>
+</body>
+</html>

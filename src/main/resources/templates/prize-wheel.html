@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prize Wheel</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="/css/prize-wheel.css">
+</head>
+<body>
+<h1>Spin the Wheel!</h1>
+
+<!-- Canvas for drawing the wheel -->
+<canvas id="wheelCanvas" width="600" height="600"></canvas>
+
+<!-- Spin button -->
+<button onclick="spinWheel()">Spin</button>
+
+<!-- Display the winning prize -->
+<div id="winning-prize" style="display: none;">
+    <h2>Congratulations! You won:    <span id="prize-name"></span></h2>
+</div>
+
+<!-- Thymeleaf script to inject the prizes and user data -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const prizes = /*[[${prizes}]]*/ [];
+    const user = /*[[${user}]]*/ {}; // Inject user data
+    /*]]>*/
+</script>
+
+<!-- Include JavaScript file -->
+<script src="/js/prize-wheel.js"></script>
+</body>
+</html>
